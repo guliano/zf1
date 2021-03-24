@@ -203,7 +203,11 @@ class Zend_Registry extends ArrayObject
      */
     public function offsetExists($index)
     {
-        return array_key_exists($index, $this);
+        if (version_compare(phpversion(), '5.2.1') === 0) {
+            return array_key_exists($index, $this);
+        }
+
+        return parent::offsetExists($index);
     }
 
 }
